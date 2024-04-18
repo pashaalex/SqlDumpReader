@@ -1,7 +1,17 @@
-# Simple use:
-```
-from sql_dump_parser import SqlSimpleDumpParser
+[Simple use](#simple)  
+[Work with files](#files)  
+[Convert to Pandas](#pandas)  
+[Customize data type convertion](#data_conv)  
+[Handle multiple tables](#multiple_tables)  
+[Specify tables to import](#tables_to_import)  
+[Specify columns to import](#columns_import)  
+[Specify max row count for all tables to import](#max_rowcount)  
 
+
+## <a id="simple">Simple use</a>
+```python
+from sql_dump_parser import SqlSimpleDumpParser
+                    
 sample_lines = [
     'create table TBL1 (id1 int, id2 int, id3 int);',
     'insert into TBL1 (id2, id1) values (1, 2)',
@@ -19,16 +29,16 @@ output:
 {'TBL1': {'id1': int, 'id2': int, 'id3': int}}
 ```
 
-# Read files:
-```
+## <a id="files">Work with files</a>
+```python
 from sql_dump_parser import SqlSimpleDumpParser
-sql_parser = SqlSimpleParser()
+sql_parser = SqlSimpleDumpParser()
 with open("sample_data\\dump01.sql", "r", encoding='UTF-8') as file_in:
     data = sql_parser.parse_tables(file_in)
 ```
 
-# Convert to Pandas:
-```
+## <a id="pandas">Convert to Pandas</a>
+```python
 from sql_dump_parser import SqlSimpleDumpParser
 import pandas as pd
 
@@ -50,8 +60,8 @@ Output:
 1    4    5    6
 ```
 
-# Customize data convertion
-```
+## <a id="data_conv">Customize data type convertion</a>
+```python
 from sql_dump_parser import SqlSimpleDumpParser
 import datetime
 
@@ -74,8 +84,8 @@ output:
 {'TBL1': [[1, datetime.date(2024, 1, 1)]]}
 ```
 
-# Multiple tables
-```
+## <a id="multiple_tables">Handle multiple tables</a>
+```python
 from sql_dump_parser import SqlSimpleDumpParser
 
 sample_lines = [
@@ -96,8 +106,8 @@ Output:
 {'TBL1': {'id1': int, 'id2': int}, 'TBL2': {'id3': int, 'id4': int}}
 ```
 
-# Specify tables to import
-```
+## <a id="tables_to_import">Specify tables to import</a>
+```python
 from sql_dump_parser import SqlSimpleDumpParser
 
 sample_lines = [
@@ -116,8 +126,8 @@ Output:
 {'TBL2': [[4, 5], [6, 7]]}
 ```
 
-# Specify columns to import:
-```
+## <a id="columns_import">Specify columns to import</a>
+```python
 from sql_dump_parser import SqlSimpleDumpParser
 
 sample_lines = [
@@ -133,9 +143,8 @@ Output:
 ```
 {'TBL1': [[1, 2], [4, 5]]}
 ```
-
-# Specify max row count for all imported table
-```
+## <a id="max_rowcount">Specify max row count for all tables to import</a>
+```python
 from sql_dump_parser import SqlSimpleDumpParser
 
 sample_lines = [
