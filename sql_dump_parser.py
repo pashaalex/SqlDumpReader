@@ -311,10 +311,10 @@ class SqlSimpleDumpParser:
         except StopIteration:
             pass
         
-    def parse_tables(self, lines, data = None, max_row_count = -1, custom_iterate_function = None, custom_data_convert_function = None):
+    def parse_tables(self, lines, data_config = None, max_row_count = -1, custom_iterate_function = None, custom_data_convert_function = None):
         self.custom_data_convert_function = custom_data_convert_function
         self.custom_iterate_function = custom_iterate_function
-        self.data_config = data
+        self.data_config = data_config
         self.table_descriptions = {}
         self.table_data = {}
         self.max_row_count = max_row_count

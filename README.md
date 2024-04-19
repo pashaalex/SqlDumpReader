@@ -7,6 +7,39 @@
 [Specify columns to import](#columns_import)  
 [Specify max row count for all tables to import](#max_rowcount)  
 
+Class **SqlSimpleDumpParser** is main class to parse SQL-dumps.
+
+parse_tables(lines, data_config = None, max_row_count = -1, custom_iterate_function = None, custom_data_convert_function = None)  
+This method parses incoming SQL-data. It is store tables structure inside internal dictionary *table_descriptions* and returns insert data.  
+
+**Parameters:**  
+
+**lines** - iterator of strings with SQL-data. Could be array or file ur custom iterator.  
+
+**data_config** - dictionary with table names and table columns to import. If None (default) - all data will be read.
+
+**max_row_count** - maximum rows that will be imported for each tables. If -1 (default) - all data will be read.
+
+**custom_iterate_function** - function, that will be called on each parsed insert clause. If this parameter defined then parsed data will not be collected and will not be returned after *parse_tables* complete.  
+Signarute of callback function is:  
+callback(table_name, row_data, field_names)
+*table_name* - name of table  
+*row_data* - list of data values  
+*field_names* - list of field names  
+
+**custom_data_convert_function** - callback function to customize data type convertion.  
+Function signature:  
+custom_data_convert_function(obj_tokens, data_type)
+*obj_tokens* - list of parsed tokens  
+*data_type* - list of tokens with data type  
+if functtion can parse data it should be returns *[parsed data], True*   
+Or *None, False* if can't parse
+
+
+
+
+
+
 
 ## <a id="simple">Simple use</a>
 ```python
